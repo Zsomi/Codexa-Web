@@ -223,6 +223,10 @@ cat ~/.ssh/id_rsa.pub
 # Repository klónozása
 git clone https://github.com/Zsomi/Codexa-Web.git .
 
+# Branch ellenőrzése és váltás
+git branch -a
+git checkout master
+
 # Vagy HTTPS-sel:
 # git clone https://github.com/Zsomi/Codexa-Web.git .
 ```

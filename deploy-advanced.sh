@@ -11,6 +11,9 @@ BACKUP_DIR="/var/backups/codexa"
 DATE=$(date +%Y%m%d_%H%M%S)
 APP_NAME="codexa-web"
 DOMAIN="https://codexa.hu"
+REPO_URL="https://github.com/Zsomi/Codexa-Web.git"
+# SSH verzió: REPO_URL="git@github.com:Zsomi/Codexa-Web.git"
+BRANCH="master"
 
 # Színek
 RED='\033[0;31m'
@@ -75,9 +78,9 @@ check_for_updates() {
     echo -e "${YELLOW}🔍 Frissítések ellenőrzése...${NC}"
     cd $PROJECT_DIR
     
-    git fetch origin master
+    git fetch origin $BRANCH
     LOCAL=$(git rev-parse HEAD)
-    REMOTE=$(git rev-parse origin/master)
+    REMOTE=$(git rev-parse origin/$BRANCH)
     
     if [ $LOCAL = $REMOTE ]; then
         echo -e "${BLUE}ℹ️  Nincs új változás a repository-ban${NC}"
@@ -101,7 +104,7 @@ deploy() {
     
     # Git pull
     echo -e "${YELLOW}📥 Változások letöltése...${NC}"
-    git pull origin master
+    git pull origin $BRANCH
     
     # Dependencies
     echo -e "${YELLOW}📦 Dependencies frissítése...${NC}"

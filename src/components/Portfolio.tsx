@@ -14,7 +14,6 @@ export default function Portfolio() {
       description: t('portfolio.hexory_store.description'),
       tech: ['Laravel', 'Next.js'],
       image: '/images/hexorystore.png',
-      liveUrl: 'https://www.hexory.eu',
       bgColor: 'from-blue-600 to-purple-600',
       hasImage: true
     },
@@ -23,7 +22,6 @@ export default function Portfolio() {
       description: t('portfolio.party_zona.description'),
       tech: ['Angular', 'Laravel'],
       image: '/images/pandt.png',
-      liveUrl: 'https://www.partyzona.hu',
       bgColor: 'from-green-600 to-blue-600',
       hasImage: true
     }
@@ -32,7 +30,6 @@ export default function Portfolio() {
     //   description: t('portfolio.bull_rugs.description'),
     //   tech: ['Angular', 'Laravel'],
     //   image: '🏠',
-    //   liveUrl: '#',
     //   bgColor: 'from-purple-600 to-pink-600',
     //   hasImage: false
     // }
@@ -103,14 +100,9 @@ export default function Portfolio() {
                 </div>
                 
                 {/* Action button */}
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full bg-gray-700 hover:bg-gray-600 text-white font-mono text-sm py-2 px-4 rounded transition-colors duration-300 group-hover:bg-blue-600 block text-center"
-                >
+                <div className="w-full bg-gray-700 text-white font-mono text-sm py-2 px-4 rounded transition-colors duration-300 block text-center cursor-default">
                   {t('portfolio.view_demo')} →
-                </a>
+                </div>
               </div>
             </div>
           ))}
