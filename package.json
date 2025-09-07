@@ -7,7 +7,12 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
-    "test:smtp": "node test-smtp.mjs"
+    "test:smtp": "node test-smtp.mjs",
+    "deploy": "chmod +x deploy-advanced.sh && ./deploy-advanced.sh",
+    "deploy:simple": "chmod +x deploy.sh && ./deploy.sh",
+    "deploy:status": "./deploy-advanced.sh status",
+    "deploy:logs": "./deploy-advanced.sh logs",
+    "deploy:rollback": "./deploy-advanced.sh rollback"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

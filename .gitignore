@@ -39,3 +39,42 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Additional Codexa specific ignores
+# PM2 files
+ecosystem.config.js.backup
+
+# Backup files
+*.backup
+*.bak
+
+# Deployment files (only on server)
+deploy.log
+
+# Image conversion temp files
+convert-image.mjs
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+.tmp/
+*.tmp
+.temp/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
