@@ -80,10 +80,15 @@ Időkeret és költségvetési elvárások?`,
       lines: 'Sorok',
       characters: 'Karakterek',
       send: 'Küldés →',
+      keyboard_shortcut: 'Ctrl+Enter vagy Shift+Enter = Küldés',
       success: 'Üzenet sikeresen elküldve az info@codexa.hu címre! Felvesszük veled a kapcsolatot 24 órán belül.',
       error: 'Hiba történt az üzenet küldése során. Kérjük próbáld újra vagy írj közvetlenül az info@codexa.hu címre.',
       phone_copied: 'Telefonszám vágólapra másolva!',
-      phone_copy_error: 'Másolás sikertelen. Telefonszám: +36 20 662 1348'
+      phone_copy_error: 'Másolás sikertelen. Telefonszám: +36 20 662 1348',
+      click_to_copy_email: 'Kattints a másoláshoz',
+      email_copied: 'Email cím vágólapra másolva!',
+      email_copy_error: 'Másolás sikertelen. Email: info@codexa.hu',
+      click_to_copy_phone: 'Kattints a másoláshoz'
     },
     
     // Footer
@@ -174,10 +179,15 @@ Timeline and budget expectations?`,
       lines: 'Lines',
       characters: 'Characters',
       send: 'Send →',
+      keyboard_shortcut: 'Ctrl+Enter or Shift+Enter = Send',
       success: 'Message successfully sent to info@codexa.hu! We will contact you within 24 hours.',
       error: 'An error occurred while sending the message. Please try again or write directly to info@codexa.hu.',
       phone_copied: 'Phone number copied to clipboard!',
-      phone_copy_error: 'Copy failed. Phone number: +36 20 662 1348'
+      phone_copy_error: 'Copy failed. Phone number: +36 20 662 1348',
+      click_to_copy_email: 'Click to copy',
+      email_copied: 'Email address copied to clipboard!',
+      email_copy_error: 'Copy failed. Email: info@codexa.hu',
+      click_to_copy_phone: 'Click to copy'
     },
     
     // Footer

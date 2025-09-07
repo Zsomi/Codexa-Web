@@ -90,6 +90,16 @@ export default function Quote() {
     });
   };
 
+  const copyEmail = () => {
+    const email = 'info@codexa.hu';
+    navigator.clipboard.writeText(email).then(() => {
+      toast.success(t('quote.email_copied'));
+    }).catch((err) => {
+      console.error('Email másolás sikertelen:', err);
+      toast.error(t('quote.email_copy_error'));
+    });
+  };
+
   return (
     <section className="py-20 bg-[#0d1117] relative overflow-hidden" ref={ref}>
       {/* Background effects */}
@@ -146,7 +156,7 @@ export default function Quote() {
                 <div className="flex items-center justify-between mt-4">
                   <div className="text-gray-500 font-mono text-xs">
                     <div>{t('quote.lines')}: {lines} | {t('quote.characters')}: {characters}</div>
-                    <div className="mt-1 text-gray-600">Ctrl+Enter vagy Shift+Enter = Küldés</div>
+                    <div className="mt-1 text-gray-600">{t('quote.keyboard_shortcut')}</div>
                   </div>
                   <button 
                     type="submit"
@@ -162,17 +172,18 @@ export default function Quote() {
           {/* Alternative contact methods */}
           <div className="text-center">
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="mailto:info@codexa.hu"
-                className="text-blue-400 hover:text-blue-300 font-mono transition-colors duration-300"
+              <button
+                onClick={copyEmail}
+                className="text-blue-400 hover:text-blue-300 font-mono transition-colors duration-300 cursor-pointer hover:underline"
+                title={t('quote.click_to_copy_email')}
               >
                 info@codexa.hu
-              </a>
+              </button>
               <span className="text-gray-600 hidden sm:block">|</span>
               <button
                 onClick={copyPhoneNumber}
                 className="text-blue-400 hover:text-blue-300 font-mono transition-colors duration-300 cursor-pointer hover:underline"
-                title="Kattints a másoláshoz"
+                title={t('quote.click_to_copy_phone')}
               >
                 +36 20 662 1348
               </button>

@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Codexa - Modern Web Development Portfolio
+
+![Codexa Website](./public/images/codexaweb.png)
+
+A modern, responsive portfolio website built with Next.js, featuring a sleek dark theme and professional contact system.
+
+## 🚀 Features
+
+- **Modern Design**: Dark theme with smooth animations and responsive layout
+- **Multilingual Support**: Hungarian and English language switching
+- **Contact System**: Custom email integration with Mailcow SMTP
+- **Portfolio Showcase**: Interactive project gallery with live website links
+- **Professional Deployment**: Production-ready with PM2 and Nginx configuration
+
+## 🛠 Tech Stack
+
+- **Frontend**: Next.js 15.5.2, React, TypeScript, Tailwind CSS
+- **Email**: Nodemailer with custom SMTP (Mailcow)
+- **Deployment**: PM2, Nginx, Ubuntu VPS
+- **Development**: ESLint, PostCSS, Toast notifications
 
 ## Getting Started
 
-First, run the development server:
+First, install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📧 Email Configuration
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The project uses a custom email system with Mailcow SMTP. Configure your environment variables:
 
-## Learn More
+```env
+SMTP_HOST=your-mail-server.com
+SMTP_PORT=587
+SMTP_USER=your-email@domain.com
+SMTP_PASS=your-password
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 🌍 Deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The project includes comprehensive deployment scripts and documentation:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `deploy.sh` - Basic deployment script
+- `deploy-advanced.sh` - Enterprise deployment with rollback
+- Complete VPS setup documentation in `/docs`
 
-## Deploy on Vercel
+## 📱 Contact
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Website**: [codexa.hu](https://codexa.hu)
+- **Email**: info@codexa.hu
+- **Phone**: +36 20 662 1348
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+Built with ❤️ by Codexa Team

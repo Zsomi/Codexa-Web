@@ -1,9 +1,20 @@
 'use client';
 
 import { useLanguage } from '@/contexts/LanguageContext';
+import { toast } from 'react-toastify';
 
 export default function Footer() {
   const { t } = useLanguage();
+  
+  const copyEmail = () => {
+    const email = 'info@codexa.hu';
+    navigator.clipboard.writeText(email).then(() => {
+      toast.success(t('quote.email_copied'));
+    }).catch((err) => {
+      console.error('Email másolás sikertelen:', err);
+      toast.error(t('quote.email_copy_error'));
+    });
+  };
   
   return (
     <footer className="bg-gray-900 border-t border-gray-800 py-12">
@@ -17,7 +28,14 @@ export default function Footer() {
               </h3>
             </div>
             <p className="text-gray-400 font-mono text-sm">
-              {t('footer.copyright')} | info@codexa.hu
+              {t('footer.copyright')} | 
+              <button
+                onClick={copyEmail}
+                className="text-blue-400 hover:text-blue-300 transition-colors duration-300 ml-1"
+                title={t('quote.click_to_copy_email')}
+              >
+                info@codexa.hu
+              </button>
             </p>
           </div>
           
