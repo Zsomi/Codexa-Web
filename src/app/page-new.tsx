@@ -1,4 +1,3 @@
-import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Technologies from '@/components/Technologies';
 import Portfolio from '@/components/Portfolio';
@@ -9,22 +8,11 @@ import Footer from '@/components/Footer';
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#0d1117]">
-      <Navbar />
-      <section id="hero">
-        <Hero />
-      </section>
-      <section id="technologies">
-        <Technologies />
-      </section>
-      <section id="portfolio">
-        <Portfolio />
-      </section>
-      <section id="services">
-        <Services />
-      </section>
-      <section id="contact">
-        <Quote />
-      </section>
+      <Hero />
+      <Technologies />
+      <Portfolio />
+      <Services />
+      <Quote />
       <Footer />
     </main>
   );
