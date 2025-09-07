@@ -42,7 +42,7 @@ export default function Footer() {
           {/* Right side - Social links */}
           <div className="flex items-center gap-6">
             <a
-              href="https://www.facebook.com/zsombor.gubis/"
+              href="https://www.facebook.com/profile.php?id=61580476229331"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-white transition-all duration-300 hover:scale-110 hover:rotate-12"
@@ -66,7 +66,7 @@ export default function Footer() {
             <span>
               {t('footer.created_by')}{' '}
               <a
-                href="https://www.facebook.com/zsombor.gubis/"
+                href="https://www.facebook.com/profile.php?id=61580476229331"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white hover:text-blue-400 transition-colors duration-300 underline decoration-dotted hover:decoration-solid"
