@@ -72,26 +72,36 @@ export default function Technologies() {
   const { t } = useLanguage();
 
   return (
-    <section className="py-20 bg-gray-900" ref={ref}>
-      <div className="container mx-auto px-6 lg:px-8">
+    <section className="py-16 sm:py-20 bg-gray-900" ref={ref}>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`max-w-4xl mx-auto transition-all duration-700 ${isVisible ? 'scroll-visible' : 'scroll-hidden'}`}>
-          <h2 className="font-mono text-3xl md:text-4xl font-bold text-white mb-12 text-center">
+          <h2 className="font-mono text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-8 sm:mb-12 text-center px-2">
             {t('technologies.title')}
           </h2>
           
-          <div className={`bg-gray-800 rounded-lg p-8 border border-gray-700 shadow-2xl hover:shadow-blue-500/10 transition-all duration-700 ${isVisible ? 'scroll-slide-left scroll-visible' : 'scroll-slide-left'}`}>
+          <div className={`bg-gray-800 rounded-lg p-4 sm:p-6 lg:p-8 border border-gray-700 shadow-2xl hover:shadow-blue-500/10 transition-all duration-700 overflow-hidden ${isVisible ? 'scroll-slide-left scroll-visible' : 'scroll-slide-left'}`}>
             <div className="font-mono text-gray-300">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                <span className="text-gray-400 ml-4 text-sm">tech-stack.json</span>
+              <div className="flex items-center gap-1 sm:gap-2 mb-3 sm:mb-4">
+                <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
+                <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
+                <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
+                <span className="text-gray-400 ml-2 sm:ml-4 text-xs sm:text-sm truncate">tech-stack.json</span>
               </div>
               
-              <pre className="text-sm md:text-base leading-relaxed">
+              <div 
+                className="text-xs sm:text-sm md:text-base leading-relaxed overflow-x-auto"
+                style={{ 
+                  wordWrap: 'break-word',
+                  overflowWrap: 'break-word',
+                  wordBreak: 'break-all',
+                  whiteSpace: 'pre-wrap'
+                }}
+              >
+                <div className="min-w-0">
 {`{
   `}<span className="text-blue-400">&quot;frameworks&quot;</span>{`: [`}
-    <span className="text-green-400">&quot;React&quot;</span>, <span className="text-green-400">&quot;Next.js&quot;</span>, <span className="text-green-400">&quot;Vue.js&quot;</span>, <span className="text-green-400">&quot;Angular&quot;</span>, <span className="text-green-400">&quot;Nuxt.js&quot;</span>
+    <span className="text-green-400">&quot;React&quot;</span>, <span className="text-green-400">&quot;Next.js&quot;</span>, <span className="text-green-400">&quot;Vue.js&quot;</span>,
+    <span className="text-green-400">&quot;Angular&quot;</span>, <span className="text-green-400">&quot;Nuxt.js&quot;</span>
   {`],
   `}<span className="text-blue-400">&quot;backend&quot;</span>{`: [`}
     <span className="text-green-400">&quot;Laravel&quot;</span>, <span className="text-green-400">&quot;Node.js&quot;</span>, <span className="text-green-400">&quot;Express&quot;</span>, <span className="text-green-400">&quot;.NET&quot;</span>
@@ -100,12 +110,13 @@ export default function Technologies() {
     <span className="text-green-400">&quot;Docker&quot;</span>, <span className="text-green-400">&quot;Git&quot;</span>, <span className="text-green-400">&quot;TailwindCSS&quot;</span>
   {`]
 }`}
-              </pre>
+                </div>
+              </div>
             </div>
           </div>
           
           {/* Tech badges */}
-          <div className={`flex flex-wrap justify-center gap-4 mt-8 transition-all duration-700 delay-300 ${isVisible ? 'scroll-slide-right scroll-visible' : 'scroll-slide-right'}`}>
+          <div className={`flex flex-wrap justify-center gap-2 sm:gap-3 lg:gap-4 mt-6 sm:mt-8 px-2 transition-all duration-700 delay-300 ${isVisible ? 'scroll-slide-right scroll-visible' : 'scroll-slide-right'}`}>
             {[
               { name: 'React', icon: <ReactIcon />, color: 'text-blue-400' },
               { name: 'Next.js', icon: <NextIcon />, color: 'text-white' },
@@ -122,10 +133,10 @@ export default function Technologies() {
             ].map((tech) => (
               <span
                 key={tech.name}
-                className="bg-gray-700 text-gray-300 px-4 py-2 rounded-full text-sm font-mono border border-gray-600 hover:border-blue-500 hover:scale-105 hover:bg-gray-600 transition-all duration-300 cursor-pointer flex items-center gap-2"
+                className="bg-gray-700 text-gray-300 px-2 sm:px-3 lg:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-mono border border-gray-600 hover:border-blue-500 hover:scale-105 hover:bg-gray-600 transition-all duration-300 cursor-pointer flex items-center gap-1 sm:gap-2 whitespace-nowrap"
               >
                 <span className={tech.color}>{tech.icon}</span>
-                {tech.name}
+                <span className="truncate">{tech.name}</span>
               </span>
             ))}
           </div>

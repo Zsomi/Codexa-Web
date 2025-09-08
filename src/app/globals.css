@@ -46,6 +46,83 @@ html {
   background: #4b5563;
 }
 
+/* Mobile-first responsive text overflow prevention */
+* {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Prevent horizontal scroll on mobile */
+html, body {
+  overflow-x: hidden;
+}
+
+/* Terminal specific text wrapping */
+.font-mono {
+  word-break: break-all;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+/* Mobile toast improvements */
+@media (max-width: 768px) {
+  .Toastify__toast-container--top-right {
+    top: 80px !important;
+    left: 8px !important;
+    right: 8px !important;
+    width: auto !important;
+    max-width: none !important;
+    transform: none !important;
+  }
+  
+  .Toastify__toast {
+    margin: 8px 0 !important;
+    border-radius: 12px !important;
+    font-size: 15px !important;
+    line-height: 1.4 !important;
+    padding: 16px !important;
+    min-height: 65px !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3) !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+  
+  .Toastify__toast-body {
+    padding: 0 !important;
+    margin: 0 !important;
+    font-weight: 500 !important;
+  }
+  
+  .Toastify__close-button {
+    font-size: 18px !important;
+    opacity: 0.8 !important;
+  }
+}
+
+/* Desktop toast positioning - keep default but ensure visibility */
+@media (min-width: 769px) {
+  .Toastify__toast-container--top-right {
+    top: 20px;
+    right: 20px;
+    width: 320px;
+  }
+}
+
+/* Better text handling for small screens */
+@media (max-width: 640px) {
+  .font-mono {
+    font-size: 0.85em;
+    line-height: 1.4;
+  }
+  
+  /* Prevent text overflow in containers */
+  .container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+}
+
 /* Terminal animation */
 @keyframes fadeIn {
   from { opacity: 0; }

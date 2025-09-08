@@ -82,22 +82,51 @@ export default function Quote() {
 
   const copyPhoneNumber = () => {
     const phoneNumber = '+36206621348';
-    navigator.clipboard.writeText(phoneNumber).then(() => {
-      toast.success(t('quote.phone_copied'));
-    }).catch((err) => {
-      console.error('Másolás sikertelen:', err);
-      toast.error(t('quote.phone_copy_error'));
-    });
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(phoneNumber).then(() => {
+        toast.success(t('quote.phone_copied'));
+      }).catch((err) => {
+        console.error('Másolás sikertelen:', err);
+        fallbackCopyToClipboard(phoneNumber);
+      });
+    } else {
+      fallbackCopyToClipboard(phoneNumber);
+    }
   };
 
   const copyEmail = () => {
     const email = 'info@codexa.hu';
-    navigator.clipboard.writeText(email).then(() => {
-      toast.success(t('quote.email_copied'));
-    }).catch((err) => {
-      console.error('Email másolás sikertelen:', err);
-      toast.error(t('quote.email_copy_error'));
-    });
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(email).then(() => {
+        toast.success(t('quote.email_copied'));
+      }).catch((err) => {
+        console.error('Email másolás sikertelen:', err);
+        fallbackCopyToClipboard(email);
+      });
+    } else {
+      fallbackCopyToClipboard(email);
+    }
+  };
+
+  // Fallback copy method for older browsers or non-secure contexts
+  const fallbackCopyToClipboard = (text: string) => {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    textArea.style.top = '-999999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      document.execCommand('copy');
+      toast.success(text.includes('@') ? t('quote.email_copied') : t('quote.phone_copied'));
+    } catch (err) {
+      console.error('Fallback másolás sikertelen:', err);
+      toast.error(text.includes('@') ? t('quote.email_copy_error') : t('quote.phone_copy_error'));
+    } finally {
+      document.body.removeChild(textArea);
+    }
   };
 
   return (
@@ -108,28 +137,28 @@ export default function Quote() {
         <div className="absolute top-3/4 right-1/4 w-96 h-96 bg-green-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse delay-1000"></div>
       </div>
       
-      <div className="container mx-auto px-6 lg:px-8 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className={`max-w-4xl mx-auto text-center transition-all duration-700 ${isVisible ? 'scroll-visible' : 'scroll-hidden'}`}>
-          <h2 className="font-mono text-3xl md:text-5xl font-bold text-white mb-6">
+          <h2 className="font-mono text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 px-2">
             {t('quote.title')}
           </h2>
           
-          <p className="text-gray-300 text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+          <p className="text-gray-300 text-base sm:text-lg md:text-xl mb-6 sm:mb-8 max-w-2xl mx-auto px-2">
             {t('quote.subtitle')}
           </p>
           
           {/* Terminal-style form */}
-          <div className={`bg-gray-800 rounded-lg border border-gray-700 p-8 max-w-2xl mx-auto mb-8 hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-700 ${isVisible ? 'scroll-slide-right scroll-visible' : 'scroll-slide-right'}`} style={{ transitionDelay: '0.3s' }}>
+          <div className={`bg-gray-800 rounded-lg border border-gray-700 p-4 sm:p-6 lg:p-8 max-w-2xl mx-auto mb-6 sm:mb-8 hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-700 ${isVisible ? 'scroll-slide-right scroll-visible' : 'scroll-slide-right'}`} style={{ transitionDelay: '0.3s' }}>
             <div className="flex items-center gap-2 mb-4">
               <div className="w-3 h-3 bg-red-500 rounded-full"></div>
               <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
               <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              <span className="text-gray-400 ml-4 text-sm font-mono">project-request.txt</span>
+              <span className="text-gray-400 ml-2 sm:ml-4 text-xs sm:text-sm font-mono truncate">project-request.txt</span>
             </div>
             
             <form onSubmit={handleSubmit}>
               <div className="text-left">
-                <div className="font-mono text-gray-400 text-sm mb-2">
+                <div className="font-mono text-gray-400 text-xs sm:text-sm mb-2 break-words">
                   $ describe-your-project --format=text
                 </div>
                 
@@ -138,7 +167,7 @@ export default function Quote() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-gray-900 text-gray-300 font-mono text-sm p-4 rounded border border-gray-600 focus:border-blue-500 focus:outline-none mb-4"
+                  className="w-full bg-gray-900 text-gray-300 font-mono text-sm p-3 sm:p-4 rounded border border-gray-600 focus:border-blue-500 focus:outline-none mb-4"
                   placeholder={t('quote.email_placeholder')}
                   required
                 />
@@ -147,20 +176,20 @@ export default function Quote() {
                   value={projectDescription}
                   onChange={(e) => setProjectDescription(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  className="w-full bg-gray-900 text-gray-300 font-mono text-sm p-4 rounded border border-gray-600 focus:border-blue-500 focus:outline-none resize-none"
+                  className="w-full bg-gray-900 text-gray-300 font-mono text-sm p-3 sm:p-4 rounded border border-gray-600 focus:border-blue-500 focus:outline-none resize-none"
                   rows={6}
                   placeholder={t('quote.project_placeholder')}
                   required
                 ></textarea>
                 
-                <div className="flex items-center justify-between mt-4">
-                  <div className="text-gray-500 font-mono text-xs">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-4 gap-3">
+                  <div className="text-gray-500 font-mono text-xs order-2 sm:order-1">
                     <div>{t('quote.lines')}: {lines} | {t('quote.characters')}: {characters}</div>
-                    <div className="mt-1 text-gray-600">{t('quote.keyboard_shortcut')}</div>
+                    <div className="mt-1 text-gray-600 hidden sm:block">{t('quote.keyboard_shortcut')}</div>
                   </div>
                   <button 
                     type="submit"
-                    className="bg-blue-500 hover:bg-blue-600 text-white font-mono font-semibold px-6 py-2 rounded transition-all duration-300 shadow-lg hover:shadow-blue-500/25"
+                    className="bg-blue-500 hover:bg-blue-600 text-white font-mono font-semibold px-4 sm:px-6 py-2 sm:py-3 rounded transition-all duration-300 shadow-lg hover:shadow-blue-500/25 w-full sm:w-auto order-1 sm:order-2"
                   >
                     {t('quote.send')}
                   </button>
@@ -170,11 +199,11 @@ export default function Quote() {
           </div>
           
           {/* Alternative contact methods */}
-          <div className="text-center">
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="text-center px-4">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
               <button
                 onClick={copyEmail}
-                className="text-blue-400 hover:text-blue-300 font-mono transition-colors duration-300 cursor-pointer hover:underline"
+                className="text-blue-400 hover:text-blue-300 font-mono transition-colors duration-300 cursor-pointer hover:underline text-sm sm:text-base break-all"
                 title={t('quote.click_to_copy_email')}
               >
                 info@codexa.hu
@@ -182,7 +211,7 @@ export default function Quote() {
               <span className="text-gray-600 hidden sm:block">|</span>
               <button
                 onClick={copyPhoneNumber}
-                className="text-blue-400 hover:text-blue-300 font-mono transition-colors duration-300 cursor-pointer hover:underline"
+                className="text-blue-400 hover:text-blue-300 font-mono transition-colors duration-300 cursor-pointer hover:underline text-sm sm:text-base"
                 title={t('quote.click_to_copy_phone')}
               >
                 +36 20 662 1348

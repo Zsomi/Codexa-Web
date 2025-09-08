@@ -32,24 +32,27 @@ export default function RootLayout({
       >
         <LanguageProvider>
           {children}
-          <ToastContainer 
+                    <ToastContainer 
             position="top-right"
             autoClose={4000}
             hideProgressBar={false}
-            newestOnTop={false}
+            newestOnTop={true}
             closeOnClick
             rtl={false}
             pauseOnFocusLoss
             draggable
             pauseOnHover
             theme="dark"
+            toastClassName="!rounded-lg !shadow-lg"
             toastStyle={{
               background: '#1f2937',
               color: '#f3f4f6',
               border: '1px solid #374151',
               borderRadius: '8px',
               fontFamily: 'var(--font-jetbrains-mono)',
-              fontSize: '14px'
+              fontSize: '14px',
+              minHeight: '60px',
+              padding: '12px 16px'
             }}
           />
         </LanguageProvider>

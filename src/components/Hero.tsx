@@ -62,10 +62,10 @@ export default function Hero() {
         <div>{'];'}</div>
       </div>
 
-      <div className="container mx-auto px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between z-10">
         {/* Left side - Content */}
-        <div className="lg:w-1/2 text-center lg:text-left mb-8 lg:mb-0">
-          <h1 className="font-mono text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+        <div className="lg:w-1/2 text-center lg:text-left mb-8 lg:mb-0 px-2">
+          <h1 className="font-mono text-2xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight break-words">
             <span className="text-gray-500">&gt;</span>{' '}
             <Typewriter 
               text={t('hero.title')}
@@ -74,20 +74,20 @@ export default function Hero() {
             />
           </h1>
           
-          <p className="text-gray-300 text-lg md:text-xl mb-8 max-w-lg">
+          <p className="text-gray-300 text-base sm:text-lg md:text-xl mb-6 sm:mb-8 max-w-lg mx-auto lg:mx-0 px-2">
             {t('hero.subtitle')}
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start px-2">
             <button 
               onClick={() => scrollToSection('contact')}
-              className="bg-blue-500 hover:bg-blue-600 text-white font-mono font-semibold px-8 py-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-blue-500/25 hover:shadow-xl hover:scale-105 animate-pulse"
+              className="bg-blue-500 hover:bg-blue-600 text-white font-mono font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-blue-500/25 hover:shadow-xl hover:scale-105 animate-pulse text-sm sm:text-base"
             >
               {t('hero.cta')}
             </button>
             <button 
               onClick={() => scrollToSection('services')}
-              className="border border-gray-600 hover:border-gray-400 text-gray-300 hover:text-white font-mono font-semibold px-8 py-4 rounded-lg transition-all duration-300 hover:scale-105"
+              className="border border-gray-600 hover:border-gray-400 text-gray-300 hover:text-white font-mono font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition-all duration-300 hover:scale-105 text-sm sm:text-base"
             >
               {t('hero.learn_more')}
             </button>
@@ -95,8 +95,8 @@ export default function Hero() {
         </div>
 
         {/* Right side - Mockup */}
-        <div className="lg:w-1/2 flex justify-center lg:justify-end">
-          <div className="relative">
+        <div className="lg:w-1/2 flex justify-center lg:justify-end mt-8 lg:mt-0 px-2 sm:px-4">
+          <div className="relative w-full max-w-xs sm:max-w-sm lg:max-w-md xl:max-w-lg overflow-hidden">
             {/* Animated Terminal Mockup */}
             <TerminalMockup />
           </div>
