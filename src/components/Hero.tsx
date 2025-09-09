@@ -39,7 +39,7 @@ export default function Hero() {
   };
   
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16 bg-[var(--background)]">
       {/* Background grid pattern */}
       <div className="absolute inset-0 opacity-20">
         <div className="grid grid-cols-12 h-full">

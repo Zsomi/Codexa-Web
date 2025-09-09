@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import LanguageSelector from './LanguageSelector';
+import ThemeSelector from './ThemeSelector';
 
 // Navigation Icons
 const HomeIcon = () => (
@@ -118,14 +119,16 @@ export default function Navbar() {
               </button>
             ))}
             
-            {/* Language Selector */}
-            <div className="ml-4">
+            {/* Theme and Language Selectors */}
+            <div className="flex items-center gap-3 ml-4">
+              <ThemeSelector />
               <LanguageSelector />
             </div>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center gap-3">
+          <div className="md:hidden flex items-center gap-2">
+            <ThemeSelector />
             <LanguageSelector />
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

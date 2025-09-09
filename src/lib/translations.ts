@@ -9,6 +9,13 @@ export const translations = {
       contact: 'Kapcsolat'
     },
     
+    // Theme
+    theme: {
+      light: 'Világos',
+      dark: 'Sötét',
+      system: 'Rendszer'
+    },
+    
     // Hero section
     hero: {
       title: 'Modern weboldal fejlesztés',
@@ -106,6 +113,13 @@ Időkeret és költségvetési elvárások?`,
       portfolio: 'Portfolio',
       services: 'Services',
       contact: 'Contact'
+    },
+    
+    // Theme
+    theme: {
+      light: 'Light',
+      dark: 'Dark',
+      system: 'System'
     },
     
     // Hero section

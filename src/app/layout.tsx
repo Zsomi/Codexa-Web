@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { LanguageProvider } from '@/contexts/LanguageContext';
+import { ThemeProvider } from '@/contexts/ThemeContext';
+import ToastWrapper from '../components/ToastWrapper';
 
 const inter = Inter({
   variable: "--font-inter",
@@ -30,32 +31,12 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
       >
-        <LanguageProvider>
-          {children}
-                    <ToastContainer 
-            position="top-right"
-            autoClose={4000}
-            hideProgressBar={false}
-            newestOnTop={true}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="dark"
-            toastClassName="!rounded-lg !shadow-lg"
-            toastStyle={{
-              background: '#1f2937',
-              color: '#f3f4f6',
-              border: '1px solid #374151',
-              borderRadius: '8px',
-              fontFamily: 'var(--font-jetbrains-mono)',
-              fontSize: '14px',
-              minHeight: '60px',
-              padding: '12px 16px'
-            }}
-          />
-        </LanguageProvider>
+        <ThemeProvider>
+          <LanguageProvider>
+            {children}
+            <ToastWrapper />
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

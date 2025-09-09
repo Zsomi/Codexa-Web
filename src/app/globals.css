@@ -5,10 +5,302 @@
   --foreground: #f9fafb;
 }
 
+/* Light theme variables */
+.light {
+  --background: #ffffff;
+  --foreground: #1f2937;
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+}
+
+/* Dark theme variables */
+.dark {
+  --background: #0d1117;
+  --foreground: #f9fafb;
+  --gray-50: #0d1117;
+  --gray-100: #161b22;
+  --gray-200: #21262d;
+  --gray-300: #30363d;
+  --gray-400: #484f58;
+  --gray-500: #656d76;
+  --gray-600: #8b949e;
+  --gray-700: #b1bac4;
+  --gray-800: #c9d1d9;
+  --gray-900: #f0f6fc;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+/* Theme-based component styles */
+.light {
+  /* Background overrides */
+  & .bg-gray-900 { background-color: #ffffff !important; }
+  & .bg-gray-800 { background-color: #f9fafb !important; }
+  & .bg-gray-700 { background-color: #f3f4f6 !important; }
+  
+  /* Text color overrides */
+  & .text-white { color: #1f2937 !important; }
+  & .text-gray-300 { color: #4b5563 !important; }
+  & .text-gray-400 { color: #6b7280 !important; }
+  & .text-gray-500 { color: #9ca3af !important; }
+  & .text-gray-600 { color: #6b7280 !important; }
+  & .text-gray-700 { color: #374151 !important; }
+  
+  /* Border overrides */
+  & .border-gray-700 { border-color: #d1d5db !important; }
+  & .border-gray-600 { border-color: #d1d5db !important; }
+  & .border-gray-800 { border-color: #e5e7eb !important; }
+  
+  /* Hover states */
+  & .hover\:bg-gray-800:hover { background-color: #f3f4f6 !important; }
+  & .hover\:bg-gray-700:hover { background-color: #e5e7eb !important; }
+  & .hover\:text-white:hover { color: #1f2937 !important; }
+  & .hover\:border-gray-400:hover { border-color: #9ca3af !important; }
+  & .hover\:border-gray-500:hover { border-color: #6b7280 !important; }
+  & .hover\:border-gray-600:hover { border-color: #9ca3af !important; }
+  
+  /* Special elements */
+  & .shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1) !important; }
+  & .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important; }
+  & .shadow-xl { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1) !important; }
+  
+  /* Navbar specific */
+  & .bg-gray-900\/95 { background-color: rgba(255, 255, 255, 0.95) !important; }
+  & .backdrop-blur-md { backdrop-filter: blur(12px) !important; }
+  
+  /* Terminal and code blocks */
+  & pre { background-color: #f9fafb !important; }
+  & code { background-color: #f3f4f6 !important; }
+  
+  /* Portfolio cards and complex shadows */
+  & .hover\:shadow-blue-500\/20:hover { box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.1) !important; }
+  & .shadow-blue-500\/20 { box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.1) !important; }
+}
+
+/* Dark theme overrides */
+.dark {
+  & .bg-gray-900 { background-color: #0f1419 !important; }
+  & .bg-gray-800 { background-color: #1f2937 !important; }
+  & .bg-gray-700 { background-color: #374151 !important; }
+  
+  & .text-white { color: #f9fafb !important; }
+  & .text-gray-300 { color: #d1d5db !important; }
+  & .text-gray-400 { color: #9ca3af !important; }
+}
+
+/* Special background overrides for both themes */
+.light [style*="background-color: rgb(13, 17, 23)"],
+.light [style*="background-color:#0d1117"],
+.light section[class*="bg-[#0d1117]"] {
+  background-color: #ffffff !important;
+}
+
+/* Scroll animations */
+.scroll-hidden {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.scroll-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  /* Text wrapping for mobile */
+  .text-wrap-mobile {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+  }
+  
+  /* Terminal code wrapping */
+  .terminal-code {
+    white-space: pre-wrap !important;
+    word-break: break-all !important;
+    overflow-wrap: break-word !important;
+  }
+  
+  /* Technology icons grid responsiveness */
+  .tech-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)) !important;
+    gap: 1rem !important;
+  }
+  
+  /* Toast positioning for mobile */
+  .Toastify__toast-container {
+    top: 20px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: calc(100vw - 40px) !important;
+    max-width: 400px !important;
+  }
+  
+  .Toastify__toast {
+    margin-bottom: 10px !important;
+    border-radius: 8px !important;
+    font-size: 14px !important;
+  }
+  
+  /* Toast container positioning */
+  .Toastify__toast-container {
+    top: 80px !important;
+    right: 16px !important;
+    width: auto !important;
+    max-width: 400px !important;
+  }
+  
+  /* Global progress bar styling - always green */
+  .Toastify__progress-bar {
+    background: linear-gradient(to right, #10b981, #059669) !important;
+  }
+}
+
+/* Toast theme integration with our app themes */
+.light {
+  /* React-toastify light theme adjustments */
+  & .Toastify__toast-theme--light {
+    background: #ffffff !important;
+    color: #1f2937 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  & .Toastify__progress-bar-theme--light {
+    background: linear-gradient(to right, #10b981, #059669) !important;
+  }
+  
+  & .Toastify__close-button--light {
+    color: #6b7280 !important;
+    opacity: 0.7 !important;
+  }
+}
+
+.dark {
+  /* React-toastify dark theme adjustments */
+  & .Toastify__toast-theme--dark {
+    background: #1f2937 !important;
+    color: #f9fafb !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+  }
+  
+  & .Toastify__progress-bar-theme--dark {
+    background: linear-gradient(to right, #10b981, #059669) !important;
+  }
+  
+  & .Toastify__close-button--dark {
+    color: #d1d5db !important;
+    opacity: 0.7 !important;
+  }
+}
+
+/* Light theme variables */
+.light {
+  --background: #ffffff;
+  --foreground: #1f2937;
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #f3f4f6;
+  --gray-900: #f9fafb;
+}
+
+/* Dark theme variables */
+.dark {
+  --background: #0d1117;
+  --foreground: #f9fafb;
+  --gray-50: #0d1117;
+  --gray-100: #161b22;
+  --gray-200: #21262d;
+  --gray-300: #30363d;
+  --gray-400: #484f58;
+  --gray-500: #6e7681;
+  --gray-600: #8b949e;
+  --gray-700: #b1bac4;
+  --gray-800: #1f2937;
+  --gray-900: #0f1419;
+}
+
+/* Theme-based component styles - COMPREHENSIVE */
+.light {
+  /* Background overrides */
+  & .bg-gray-900 { background-color: #ffffff !important; }
+  & .bg-gray-800 { background-color: #f9fafb !important; }
+  & .bg-gray-700 { background-color: #f3f4f6 !important; }
+  
+  /* Text color overrides */
+  & .text-white { color: #1f2937 !important; }
+  & .text-gray-300 { color: #4b5563 !important; }
+  & .text-gray-400 { color: #6b7280 !important; }
+  & .text-gray-500 { color: #9ca3af !important; }
+  & .text-gray-600 { color: #6b7280 !important; }
+  & .text-gray-700 { color: #374151 !important; }
+  
+  /* Border overrides */
+  & .border-gray-700 { border-color: #d1d5db !important; }
+  & .border-gray-600 { border-color: #d1d5db !important; }
+  & .border-gray-800 { border-color: #e5e7eb !important; }
+  
+  /* Hover states */
+  & .hover\:bg-gray-800:hover { background-color: #f3f4f6 !important; }
+  & .hover\:bg-gray-700:hover { background-color: #e5e7eb !important; }
+  & .hover\:text-white:hover { color: #1f2937 !important; }
+  & .hover\:border-gray-400:hover { border-color: #9ca3af !important; }
+  & .hover\:border-gray-500:hover { border-color: #6b7280 !important; }
+  & .hover\:border-gray-600:hover { border-color: #9ca3af !important; }
+  
+  /* Special elements */
+  & .shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1) !important; }
+  & .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important; }
+  & .shadow-xl { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1) !important; }
+  
+  /* Navbar specific */
+  & .bg-gray-900\/95 { background-color: rgba(255, 255, 255, 0.95) !important; }
+  & .backdrop-blur-md { backdrop-filter: blur(12px) !important; }
+  
+  /* Terminal and code blocks */
+  & pre { background-color: #f9fafb !important; }
+  & code { background-color: #f3f4f6 !important; }
+  
+  /* Portfolio cards and complex shadows */
+  & .hover\:shadow-blue-500\/20:hover { box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.1) !important; }
+  & .shadow-blue-500\/20 { box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.1) !important; }
+}
+
+/* Dark theme specific overrides to ensure consistency */
+.dark {
+  /* Ensure dark theme stays dark */
+  & .bg-gray-900 { background-color: #0f1419 !important; }
+  & .bg-gray-800 { background-color: #1f2937 !important; }
+  & .bg-gray-700 { background-color: #374151 !important; }
+  
+  & .text-white { color: #f9fafb !important; }
+  & .text-gray-300 { color: #d1d5db !important; }
+  & .text-gray-400 { color: #9ca3af !important; }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .font-mono {
