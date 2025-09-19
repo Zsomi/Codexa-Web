@@ -9,13 +9,6 @@ export const translations = {
       contact: 'Kapcsolat'
     },
     
-    // Theme
-    theme: {
-      light: 'Világos',
-      dark: 'Sötét',
-      system: 'Rendszer'
-    },
-    
     // Hero section
     hero: {
       title: 'Modern weboldalak vállalkozásoknak',
@@ -159,13 +152,6 @@ export const translations = {
       portfolio: 'Portfolio',
       services: 'Services',
       contact: 'Contact'
-    },
-    
-    // Theme
-    theme: {
-      light: 'Light',
-      dark: 'Dark',
-      system: 'System'
     },
     
     // Hero section

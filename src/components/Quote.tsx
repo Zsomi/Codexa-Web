@@ -64,12 +64,12 @@ export default function Quote() {
           <h2 className={`text-4xl md:text-5xl font-bold text-white mb-6 transition-all duration-700 ${isVisible ? 'scroll-visible' : 'scroll-hidden'}`}>
             <span className="text-blue-400">{t('quote.title')}</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <p className={`text-xl text-gray-300 max-w-2xl mx-auto transition-all duration-700 ${isVisible ? 'scroll-visible' : 'scroll-hidden'}`} style={{ animationDelay: '0.2s' }}>
             {t('quote.subtitle')}
           </p>
         </div>
 
-        <div className={`transition-all duration-700 ${isVisible ? 'scroll-visible' : 'scroll-hidden'}`}>
+        <div className={`transition-all duration-700 ${isVisible ? 'scroll-visible' : 'scroll-hidden'}`} style={{ animationDelay: '0.4s' }}>
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             <div>
               <h3 className="text-2xl font-bold text-white mb-6">

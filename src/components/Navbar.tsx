@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { smoothScrollToSection } from '@/utils/scrollUtils';
 import LanguageSelector from './LanguageSelector';
 
 // Navigation Icons
@@ -50,38 +51,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Smooth scroll to section with custom animation
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const navbarHeight = 80;
-      const targetPosition = element.offsetTop - navbarHeight;
-      const startPosition = window.pageYOffset;
-      const distance = targetPosition - startPosition;
-      const duration = 1200; // 1.2 seconds for smooth animation
-      let start: number | null = null;
-
-      function animation(currentTime: number) {
-        if (start === null) start = currentTime;
-        const timeElapsed = currentTime - start;
-        const run = ease(timeElapsed, startPosition, distance, duration);
-        window.scrollTo(0, run);
-        if (timeElapsed < duration) requestAnimationFrame(animation);
-      }
-
-      // Easing function for smooth animation
-      function ease(t: number, b: number, c: number, d: number) {
-        t /= d / 2;
-        if (t < 1) return c / 2 * t * t + b;
-        t--;
-        return -c / 2 * (t * (t - 2) - 1) + b;
-      }
-
-      requestAnimationFrame(animation);
-    }
-    setIsMobileMenuOpen(false); // Close mobile menu after navigation
-  };
-
   const navItems = [
     { name: t('nav.home'), id: 'hero', icon: <HomeIcon /> },
     { name: t('nav.technologies'), id: 'technologies', icon: <TechIcon /> },
@@ -99,7 +68,10 @@ export default function Navbar() {
           {/* Logo */}
           <div 
             className="font-mono text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent cursor-pointer hover:from-blue-300 hover:to-blue-500 transition-all duration-300"
-            onClick={() => scrollToSection('hero')}
+            onClick={() => {
+              smoothScrollToSection('hero');
+              setIsMobileMenuOpen(false);
+            }}
           >
             Codexa
           </div>
@@ -109,7 +81,10 @@ export default function Navbar() {
             {navItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => scrollToSection(item.id)}
+                onClick={() => {
+                  smoothScrollToSection(item.id);
+                  setIsMobileMenuOpen(false);
+                }}
                 className="flex items-center gap-3 text-gray-300 hover:text-blue-400 font-medium text-base transition-all duration-300 relative group px-3 py-2"
               >
                 <span className="text-blue-400 group-hover:text-blue-300 w-5 h-5">{item.icon}</span>
@@ -165,7 +140,10 @@ export default function Navbar() {
               {navItems.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => scrollToSection(item.id)}
+                  onClick={() => {
+                    smoothScrollToSection(item.id);
+                    setIsMobileMenuOpen(false);
+                  }}
                   className="flex items-center gap-4 w-full text-left px-4 py-4 text-gray-300 hover:text-blue-400 hover:bg-blue-500/10 font-medium text-base transition-all duration-300 rounded-md"
                 >
                   <span className="text-blue-400 w-6 h-6">{item.icon}</span>

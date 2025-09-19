@@ -80,7 +80,7 @@ export default function Technologies() {
               {t('technologies.title')}
             </span>
           </h2>
-          <p className="text-gray-300 text-lg text-center mb-12 max-w-2xl mx-auto">
+          <p className={`text-gray-300 text-lg text-center mb-12 max-w-2xl mx-auto transition-all duration-700 ${isVisible ? 'scroll-visible' : 'scroll-hidden'}`} style={{ animationDelay: '0.2s' }}>
             {t('technologies.subtitle')}
           </p>
           

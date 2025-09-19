@@ -2,6 +2,7 @@
 
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { smoothScrollToSection } from '@/utils/scrollUtils';
 import { useState, useEffect } from 'react';
 
 export default function Hero() {
@@ -12,37 +13,6 @@ export default function Hero() {
   useEffect(() => {
     setIsClient(true);
   }, []);
-  
-  // Smooth scroll to section with custom animation
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const navbarHeight = 80;
-      const targetPosition = element.offsetTop - navbarHeight;
-      const startPosition = window.pageYOffset;
-      const distance = targetPosition - startPosition;
-      const duration = 1500; // 1.5 seconds for smooth scroll
-      let start: number | null = null;
-
-      function animation(currentTime: number) {
-        if (start === null) start = currentTime;
-        const timeElapsed = currentTime - start;
-        const run = ease(timeElapsed, startPosition, distance, duration);
-        window.scrollTo(0, run);
-        if (timeElapsed < duration) requestAnimationFrame(animation);
-      }
-
-      // Easing function for smooth animation (ease-in-out)
-      function ease(t: number, b: number, c: number, d: number) {
-        t /= d / 2;
-        if (t < 1) return c / 2 * t * t + b;
-        t--;
-        return -c / 2 * (t * (t - 2) - 1) + b;
-      }
-
-      requestAnimationFrame(animation);
-    }
-  };
   
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16" ref={ref}>
@@ -84,7 +54,7 @@ export default function Hero() {
         {/* Call to Action */}
         <div className={`mb-16 transition-all duration-700 ${isVisible ? 'scroll-visible' : 'scroll-hidden'}`} style={{ animationDelay: '0.6s' }}>
                       <button 
-            onClick={() => scrollToSection('contact')}
+            onClick={() => smoothScrollToSection('contact')}
             className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold text-lg px-10 py-4 rounded-xl transition-all duration-300 shadow-2xl hover:shadow-blue-500/30 hover:scale-105 transform mb-4"
           >
             <svg className="inline-block w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -95,7 +65,7 @@ export default function Hero() {
           
           <div className="mt-4">
             <button 
-              onClick={() => scrollToSection('services')}
+              onClick={() => smoothScrollToSection('services')}
               className="text-blue-300 hover:text-blue-200 font-medium text-lg underline decoration-2 underline-offset-4 hover:no-underline transition-all duration-300"
             >
               {t('hero.learn_more')}

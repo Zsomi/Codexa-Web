@@ -2,6 +2,7 @@
 
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { smoothScrollToSection } from '@/utils/scrollUtils';
 
 export default function Services() {
   const { ref, isVisible } = useScrollAnimation();
@@ -50,7 +51,7 @@ export default function Services() {
           <h2 className={`text-4xl md:text-5xl font-bold text-white mb-4 transition-all duration-700 ${isVisible ? 'scroll-visible' : 'scroll-hidden'}`}>
             <span className="text-blue-400">{t('services.title')}</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <p className={`text-xl text-gray-300 max-w-2xl mx-auto transition-all duration-700 ${isVisible ? 'scroll-visible' : 'scroll-hidden'}`} style={{ animationDelay: '0.2s' }}>
             {t('services.subtitle')}
           </p>
         </div>
@@ -90,12 +91,7 @@ export default function Services() {
               
               {/* CTA Button */}
               <button 
-                onClick={() => {
-                  const element = document.getElementById('contact');
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
+                onClick={() => smoothScrollToSection('contact')}
                 className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 hover:scale-105 transform"
               >
                 {t('services.cta')}
@@ -105,7 +101,7 @@ export default function Services() {
         </div>
         
         {/* Additional info */}
-        <div className="text-center mt-16">
+        <div className={`text-center mt-16 transition-all duration-700 ${isVisible ? 'scroll-visible' : 'scroll-hidden'}`} style={{ animationDelay: '0.6s' }}>
           <p className="text-gray-400 mb-4 flex items-center justify-center gap-2">
             <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
@@ -113,12 +109,7 @@ export default function Services() {
             <strong className="text-blue-400">{t('services.custom_needs.question')}</strong> {t('services.custom_needs.answer')}
           </p>
           <button 
-            onClick={() => {
-              const element = document.getElementById('contact');
-              if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-              }
-            }}
+            onClick={() => smoothScrollToSection('contact')}
             className="text-blue-300 hover:text-blue-200 font-medium underline decoration-2 underline-offset-4 hover:no-underline transition-all duration-300"
           >
             {t('services.custom_needs.cta')}

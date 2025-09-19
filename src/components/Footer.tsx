@@ -1,10 +1,12 @@
 'use client';
 
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { toast } from 'react-toastify';
 
 export default function Footer() {
   const { t } = useLanguage();
+  const { ref, isVisible } = useScrollAnimation();
   
   const copyEmail = () => {
     const email = 'info@codexa.hu';
@@ -17,9 +19,9 @@ export default function Footer() {
   };
   
   return (
-    <footer className="bg-gradient-to-b from-gray-900 to-black border-t border-blue-500/30 py-12">
+    <footer className="bg-gradient-to-b from-gray-900 to-black border-t border-blue-500/30 py-12" ref={ref}>
       <div className="container mx-auto px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-center">
+        <div className={`flex flex-col md:flex-row justify-between items-center transition-all duration-700 ${isVisible ? 'scroll-visible' : 'scroll-hidden'}`}>
           {/* Left side - Company info */}
           <div className="mb-6 md:mb-0">
             <div className="flex items-center gap-4 mb-4">
@@ -61,7 +63,7 @@ export default function Footer() {
         </div>
         
         {/* Bottom separator and additional info */}
-        <div className="border-t border-blue-500/20 mt-8 pt-8">
+        <div className={`border-t border-blue-500/20 mt-8 pt-8 transition-all duration-700 ${isVisible ? 'scroll-visible' : 'scroll-hidden'}`} style={{ animationDelay: '0.2s' }}>
           <div className="text-center text-gray-400 text-sm font-medium">
             <span>
               {t('footer.created_by')}{' '}
