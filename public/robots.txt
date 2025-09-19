@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Block admin areas
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+
+# Sitemap
+Sitemap: https://codexa.hu/sitemap.xml

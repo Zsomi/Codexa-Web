@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import LanguageSelector from './LanguageSelector';
-import ThemeSelector from './ThemeSelector';
 
 // Navigation Icons
 const HomeIcon = () => (
@@ -93,49 +92,47 @@ export default function Navbar() {
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-gray-900/95 backdrop-blur-md border-b border-gray-800' : 'bg-transparent'
+      isScrolled ? 'bg-gray-900/95 backdrop-blur-md border-b border-blue-500/30' : 'bg-transparent'
     }`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-14 sm:h-16">
+        <div className="flex items-center justify-between h-16 sm:h-18">
           {/* Logo */}
           <div 
-            className="font-mono text-lg sm:text-xl font-bold text-white cursor-pointer hover:text-blue-400 transition-colors duration-300"
+            className="font-mono text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent cursor-pointer hover:from-blue-300 hover:to-blue-500 transition-all duration-300"
             onClick={() => scrollToSection('hero')}
           >
             Codexa
           </div>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
+          <div className="hidden md:flex items-center space-x-8 lg:space-x-10">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="flex items-center gap-2 text-gray-300 hover:text-white font-mono text-sm transition-colors duration-300 relative group"
+                className="flex items-center gap-3 text-gray-300 hover:text-blue-400 font-medium text-base transition-all duration-300 relative group px-3 py-2"
               >
-                {item.icon}
+                <span className="text-blue-400 group-hover:text-blue-300 w-5 h-5">{item.icon}</span>
                 {item.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-blue-600 transition-all duration-300 group-hover:w-full"></span>
               </button>
             ))}
             
-            {/* Theme and Language Selectors */}
-            <div className="flex items-center gap-3 ml-4">
-              <ThemeSelector />
+            {/* Language Selector */}
+            <div className="flex items-center gap-4 ml-6 pl-6 border-l border-gray-700">
               <LanguageSelector />
             </div>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center gap-2">
-            <ThemeSelector />
+          <div className="md:hidden flex items-center gap-3">
             <LanguageSelector />
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-gray-300 hover:text-white transition-colors duration-300 p-2 border border-gray-600 rounded-md hover:border-gray-400"
+              className="text-gray-300 hover:text-blue-400 transition-colors duration-300 p-3 border border-gray-600 hover:border-blue-500 rounded-md"
             >
               <svg
-                className="w-5 h-5"
+                className="w-6 h-6"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -163,15 +160,15 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-gray-900/95 backdrop-blur-md border-t border-gray-800">
-            <div className="px-2 pt-2 pb-3 space-y-1">
+          <div className="md:hidden bg-gray-900/95 backdrop-blur-md border-t border-blue-500/30">
+            <div className="px-3 pt-3 pb-4 space-y-2">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="flex items-center gap-3 w-full text-left px-3 py-3 text-gray-300 hover:text-white hover:bg-gray-800 font-mono text-sm transition-colors duration-300 rounded-md"
+                  className="flex items-center gap-4 w-full text-left px-4 py-4 text-gray-300 hover:text-blue-400 hover:bg-blue-500/10 font-medium text-base transition-all duration-300 rounded-md"
                 >
-                  {item.icon}
+                  <span className="text-blue-400 w-6 h-6">{item.icon}</span>
                   {item.name}
                 </button>
               ))}

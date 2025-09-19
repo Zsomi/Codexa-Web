@@ -1,221 +1,213 @@
 'use client';
 
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Quote() {
   const { ref, isVisible } = useScrollAnimation();
   const { t } = useLanguage();
-  const [projectDescription, setProjectDescription] = useState('');
-  const [email, setEmail] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Calculate lines and characters
-  const lines = projectDescription.split('\n').length;
-  const characters = projectDescription.length;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    try {
-      // Validáció
-      if (!email.trim() || !projectDescription.trim()) {
-        toast.error('Kérjük töltsd ki mindkét mezőt!');
-        return;
-      }
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      toast.error(t('quote.validation_error'));
+      return;
+    }
 
-      // API hívás a saját backend endpoint-ra
+    setIsSubmitting(true);
+    
+    try {
       const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          email: email.trim(),
-          projectDescription: projectDescription.trim(),
-        }),
+        body: JSON.stringify(formData),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        console.log('Email sikeresen elküldve:', data);
         toast.success(t('quote.success'));
-        
-        // Form reset
-        setEmail('');
-        setProjectDescription('');
+        setFormData({ name: '', email: '', message: '' });
       } else {
-        throw new Error(data.error || 'Ismeretlen hiba történt');
+        throw new Error(data.error || t('quote.error'));
       }
-      
     } catch (error) {
-      console.error('Email küldési hiba:', error);
+      console.error('Error:', error);
       toast.error(t('quote.error'));
-    }
-  };
-
-  // Handle keyboard shortcuts for sending
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    // Ctrl+Enter vagy Shift+Enter = küldés
-    if ((e.ctrlKey || e.shiftKey) && e.key === 'Enter') {
-      e.preventDefault();
-      
-      // Ellenőrizzük hogy van-e email és projekt leírás
-      if (email.trim() && projectDescription.trim()) {
-        const form = e.currentTarget.form;
-        if (form) {
-          // Create a synthetic submit event
-          const submitEvent = new Event('submit', { bubbles: true, cancelable: true });
-          Object.defineProperty(submitEvent, 'target', {
-            writable: false,
-            value: form,
-          });
-          handleSubmit(submitEvent as unknown as React.FormEvent);
-        }
-      } else {
-        toast.error('Kérjük töltsd ki az email címet és a projekt leírást!');
-      }
-    }
-  };
-
-  const copyPhoneNumber = () => {
-    const phoneNumber = '+36206621348';
-    if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(phoneNumber).then(() => {
-        toast.success(t('quote.phone_copied'));
-      }).catch((err) => {
-        console.error('Másolás sikertelen:', err);
-        fallbackCopyToClipboard(phoneNumber);
-      });
-    } else {
-      fallbackCopyToClipboard(phoneNumber);
-    }
-  };
-
-  const copyEmail = () => {
-    const email = 'info@codexa.hu';
-    if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(email).then(() => {
-        toast.success(t('quote.email_copied'));
-      }).catch((err) => {
-        console.error('Email másolás sikertelen:', err);
-        fallbackCopyToClipboard(email);
-      });
-    } else {
-      fallbackCopyToClipboard(email);
-    }
-  };
-
-  // Fallback copy method for older browsers or non-secure contexts
-  const fallbackCopyToClipboard = (text: string) => {
-    const textArea = document.createElement('textarea');
-    textArea.value = text;
-    textArea.style.position = 'fixed';
-    textArea.style.left = '-999999px';
-    textArea.style.top = '-999999px';
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
-    try {
-      document.execCommand('copy');
-      toast.success(text.includes('@') ? t('quote.email_copied') : t('quote.phone_copied'));
-    } catch (err) {
-      console.error('Fallback másolás sikertelen:', err);
-      toast.error(text.includes('@') ? t('quote.email_copy_error') : t('quote.phone_copy_error'));
     } finally {
-      document.body.removeChild(textArea);
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <section className="py-20 bg-[#0d1117] relative overflow-hidden" ref={ref}>
-      {/* Background effects */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse"></div>
-        <div className="absolute top-3/4 right-1/4 w-96 h-96 bg-green-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse delay-1000"></div>
-      </div>
-      
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className={`max-w-4xl mx-auto text-center transition-all duration-700 ${isVisible ? 'scroll-visible' : 'scroll-hidden'}`}>
-          <h2 className="font-mono text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 px-2">
-            {t('quote.title')}
+    <section className="py-20 bg-gradient-to-b from-gray-900 to-black" ref={ref}>
+      <div className="container mx-auto px-6 lg:px-8 max-w-4xl">
+        <div className="text-center mb-16">
+          <h2 className={`text-4xl md:text-5xl font-bold text-white mb-6 transition-all duration-700 ${isVisible ? 'scroll-visible' : 'scroll-hidden'}`}>
+            <span className="text-blue-400">{t('quote.title')}</span>
           </h2>
-          
-          <p className="text-gray-300 text-base sm:text-lg md:text-xl mb-6 sm:mb-8 max-w-2xl mx-auto px-2">
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             {t('quote.subtitle')}
           </p>
-          
-          {/* Terminal-style form */}
-          <div className={`bg-gray-800 rounded-lg border border-gray-700 p-4 sm:p-6 lg:p-8 max-w-2xl mx-auto mb-6 sm:mb-8 hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-700 ${isVisible ? 'scroll-slide-right scroll-visible' : 'scroll-slide-right'}`} style={{ transitionDelay: '0.3s' }}>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-              <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              <span className="text-gray-400 ml-2 sm:ml-4 text-xs sm:text-sm font-mono truncate">project-request.txt</span>
-            </div>
-            
-            <form onSubmit={handleSubmit}>
-              <div className="text-left">
-                <div className="font-mono text-gray-400 text-xs sm:text-sm mb-2 break-words">
-                  $ describe-your-project --format=text
+        </div>
+
+        <div className={`transition-all duration-700 ${isVisible ? 'scroll-visible' : 'scroll-hidden'}`}>
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            <div>
+              <h3 className="text-2xl font-bold text-white mb-6">
+                {t('quote.why_us.title')}
+              </h3>
+              
+              <div className="space-y-6 mb-8">
+                <div className="flex items-start gap-4">
+                  <div className="bg-blue-500 p-4 rounded-xl flex-shrink-0">
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold text-lg mb-2">{t('quote.why_us.fast_response.title')}</h4>
+                    <p className="text-gray-300">{t('quote.why_us.fast_response.description')}</p>
+                  </div>
                 </div>
                 
-                {/* Email input */}
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-gray-900 text-gray-300 font-mono text-sm p-3 sm:p-4 rounded border border-gray-600 focus:border-blue-500 focus:outline-none mb-4"
-                  placeholder={t('quote.email_placeholder')}
-                  required
-                />
-                
-                <textarea
-                  value={projectDescription}
-                  onChange={(e) => setProjectDescription(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  className="w-full bg-gray-900 text-gray-300 font-mono text-sm p-3 sm:p-4 rounded border border-gray-600 focus:border-blue-500 focus:outline-none resize-none"
-                  rows={6}
-                  placeholder={t('quote.project_placeholder')}
-                  required
-                ></textarea>
-                
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-4 gap-3">
-                  <div className="text-gray-500 font-mono text-xs order-2 sm:order-1">
-                    <div>{t('quote.lines')}: {lines} | {t('quote.characters')}: {characters}</div>
-                    <div className="mt-1 text-gray-600 hidden sm:block">{t('quote.keyboard_shortcut')}</div>
+                <div className="flex items-start gap-4">
+                  <div className="bg-blue-500 p-4 rounded-xl flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 16 16">
+                      <path d="M0 5a5 5 0 0 0 4.027 4.905 6.5 6.5 0 0 1 .544-2.073C3.695 7.536 3.132 6.864 3 5.91h-.5v-.426h.466V5.05q-.001-.07.004-.135H2.5v-.427h.511C3.236 3.24 4.213 2.5 5.681 2.5c.316 0 .59.031.819.085v.733a3.5 3.5 0 0 0-.815-.082c-.919 0-1.538.466-1.734 1.252h1.917v.427h-1.98q-.004.70-.003.147v.422h1.983v.427H3.93c.118.602.468 1.03 1.005 1.229a6.5 6.5 0 0 1 4.97-3.113A5.002 5.002 0 0 0 0 5m16 5.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0m-7.75 1.322c.069.835.746 1.485 1.964 1.562V14h.54v-.62c1.259-.086 1.996-.74 1.996-1.69 0-.865-.563-1.31-1.57-1.54l-.426-.1V8.374c.54.06.884.347.966.745h.948c-.07-.804-.779-1.433-1.914-1.502V7h-.54v.629c-1.076.103-1.808.732-1.808 1.622 0 .787.544 1.288 1.45 1.493l.358.085v1.78c-.554-.08-.92-.376-1.003-.787zm1.96-1.895c-.532-.12-.82-.364-.82-.732 0-.41.311-.719.824-.809v1.54h-.005zm.622 1.044c.645.145.943.38.943.796 0 .474-.37.8-1.02.86v-1.674z"/>
+                    </svg>
                   </div>
-                  <button 
-                    type="submit"
-                    className="bg-blue-500 hover:bg-blue-600 text-white font-mono font-semibold px-4 sm:px-6 py-2 sm:py-3 rounded transition-all duration-300 shadow-lg hover:shadow-blue-500/25 w-full sm:w-auto order-1 sm:order-2"
-                  >
-                    {t('quote.send')}
-                  </button>
+                  <div>
+                    <h4 className="text-white font-bold text-lg mb-2">{t('quote.why_us.free_consultation.title')}</h4>
+                    <p className="text-gray-300">{t('quote.why_us.free_consultation.description')}</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-4">
+                  <div className="bg-blue-500 p-4 rounded-xl flex-shrink-0">
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold text-lg mb-2">{t('quote.why_us.customized.title')}</h4>
+                    <p className="text-gray-300">{t('quote.why_us.customized.description')}</p>
+                  </div>
                 </div>
               </div>
-            </form>
-          </div>
-          
-          {/* Alternative contact methods */}
-          <div className="text-center px-4">
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
-              <button
-                onClick={copyEmail}
-                className="text-blue-400 hover:text-blue-300 font-mono transition-colors duration-300 cursor-pointer hover:underline text-sm sm:text-base break-all"
-                title={t('quote.click_to_copy_email')}
-              >
-                info@codexa.hu
-              </button>
-              <span className="text-gray-600 hidden sm:block">|</span>
-              <button
-                onClick={copyPhoneNumber}
-                className="text-blue-400 hover:text-blue-300 font-mono transition-colors duration-300 cursor-pointer hover:underline text-sm sm:text-base"
-                title={t('quote.click_to_copy_phone')}
-              >
-                +36 20 662 1348
-              </button>
+              
+              <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6">
+                <h4 className="text-blue-400 font-bold text-lg mb-4 flex items-center gap-3">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  {t('quote.contact_info.title')}
+                </h4>
+                <div className="space-y-3">
+                  <p className="text-gray-300 text-sm">
+                    <strong className="text-blue-400">{t('quote.contact_info.email')}</strong> info@codexa.hu
+                  </p>
+                  <p className="text-gray-300 text-sm">
+                    <strong className="text-blue-400">{t('quote.contact_info.phone')}</strong> +36 20 662 1348
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <form onSubmit={handleSubmit} className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 border border-blue-500/20">
+                <div className="space-y-6">
+                  <div>
+                    <label htmlFor="name" className="block text-white font-medium mb-2">
+                      {t('quote.form.name_label')}
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                      placeholder={t('quote.form.name_placeholder')}
+                      required
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="email" className="block text-white font-medium mb-2">
+                      {t('quote.form.email_label')}
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
+                      placeholder={t('quote.form.email_placeholder')}
+                      required
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="message" className="block text-white font-medium mb-2">
+                      {t('quote.form.message_label')}
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows={5}
+                      value={formData.message}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all resize-none"
+                      placeholder={t('quote.form.message_placeholder')}
+                      required
+                    />
+                  </div>
+                  
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 disabled:from-gray-600 disabled:to-gray-700 text-white disabled:text-gray-400 font-bold py-4 px-6 rounded-xl transition-all duration-300 hover:scale-105 transform disabled:hover:scale-100"
+                  >
+                    {isSubmitting ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <div className="w-4 h-4 border-2 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
+                        {t('quote.form.submitting')}
+                      </span>
+                    ) : (
+                      <span className="flex items-center justify-center gap-2">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        {t('quote.form.submit')}
+                      </span>
+                    )}
+                  </button>
+                </div>
+                
+                <p className="text-gray-400 text-sm mt-4 text-center">
+                  {t('quote.form.required_note')}
+                </p>
+              </form>
             </div>
           </div>
         </div>

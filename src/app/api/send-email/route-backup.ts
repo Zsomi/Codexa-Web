@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+i                                        <h3 style="margin: 0 0 12px 0; color: #f9fafb; font-size: 16px; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 8px;">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                                                <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="#f9fafb"/>
+                                            </svg>
+                                            Küldő adatai:
+                                        </h3>port nodemailer from 'nodemailer';
 
 // Email template function
 function generateEmailHTML(projectDescription: string, clientEmail: string, clientName: string) {
@@ -35,37 +40,25 @@ function generateEmailHTML(projectDescription: string, clientEmail: string, clie
                             <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #374151; border: 1px solid #4b5563; border-left: 3px solid #3b82f6; border-radius: 6px; margin-bottom: 24px;">
                                 <tr>
                                     <td style="padding: 16px;">
-                                        <table cellpadding="0" cellspacing="0" border="0">
-                                            <tr>
-                                                <td style="vertical-align: middle; padding-right: 8px;">
-                                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M12 2L13.09 8.26L19 7L14.74 11.74L21 12L14.74 12.26L19 17L13.09 15.74L12 22L10.91 15.74L5 17L9.26 12.26L3 12L9.26 11.74L5 7L10.91 8.26L12 2Z" fill="#3b82f6"/>
-                                                    </svg>
-                                                </td>
-                                                <td style="vertical-align: middle;">
-                                                    <h2 style="font-size: 18px; font-weight: 600; color: #3b82f6; margin: 0; font-family: 'JetBrains Mono', monospace;">Új weboldal megrendelés!</h2>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                        <p style="margin: 8px 0 0 0; color: #d1d5db; font-size: 14px;">Új projektjavaslat érkezett be a weboldalról.</p>
+                                        <h2 style="font-size: 18px; font-weight: 600; color: #3b82f6; margin: 0 0 8px 0; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 8px;">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                                                <path d="M12 2L13.09 8.26L19 7L14.74 11.74L21 12L14.74 12.26L19 17L13.09 15.74L12 22L10.91 15.74L5 17L9.26 12.26L3 12L9.26 11.74L5 7L10.91 8.26L12 2Z" fill="#3b82f6"/>
+                                            </svg>
+                                            Új weboldal megrendelés!
+                                        </h2>
+                                        <p style="margin: 0; color: #d1d5db; font-size: 14px;">Új projektjavaslat érkezett be a weboldalról.</p>
                                     </td>
                                 </tr>
                             </table>
                             
                             <!-- Project Description -->
-                            <table cellpadding="0" cellspacing="0" border="0" style="margin: 20px 0 12px 0;">
-                                <tr>
-                                    <td style="vertical-align: middle; padding-right: 8px;">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.89 22 5.99 22H18C19.1 22 20 21.1 20 20V8L14 2ZM18 20H6V4H13V9H18V20Z" fill="#f9fafb"/>
-                                            <path d="M8 12H16V14H8V12ZM8 16H13V18H8V16Z" fill="#f9fafb"/>
-                                        </svg>
-                                    </td>
-                                    <td style="vertical-align: middle;">
-                                        <h3 style="color: #f9fafb; font-family: 'JetBrains Mono', monospace; margin: 0; font-size: 16px; font-weight: 600;">Projekt leírás:</h3>
-                                    </td>
-                                </tr>
-                            </table>
+                            <h3 style="color: #f9fafb; font-family: 'JetBrains Mono', monospace; margin: 20px 0 12px 0; font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                                    <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.89 22 5.99 22H18C19.1 22 20 21.1 20 20V8L14 2ZM18 20H6V4H13V9H18V20Z" fill="#f9fafb"/>
+                                    <path d="M8 12H16V14H8V12ZM8 16H13V18H8V16Z" fill="#f9fafb"/>
+                                </svg>
+                                Projekt leírás:
+                            </h3>
                             
                             <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #0d1117; border: 1px solid #30363d; border-radius: 6px; margin: 16px 0;">
                                 <tr>
@@ -75,22 +68,11 @@ function generateEmailHTML(projectDescription: string, clientEmail: string, clie
                                 </tr>
                             </table>
                             
-                            <!-- Client Info -->
+                            <!-- Client Email -->
                             <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #374151; border: 1px solid #4b5563; border-radius: 6px; margin: 20px 0;">
                                 <tr>
                                     <td style="padding: 16px;">
-                                        <table cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 12px;">
-                                            <tr>
-                                                <td style="vertical-align: middle; padding-right: 8px;">
-                                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="#f9fafb"/>
-                                                    </svg>
-                                                </td>
-                                                <td style="vertical-align: middle;">
-                                                    <h3 style="margin: 0; color: #f9fafb; font-size: 16px; font-family: 'JetBrains Mono', monospace;">Küldő adatai:</h3>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                        <h3 style="margin: 0 0 12px 0; color: #f9fafb; font-size: 16px; font-family: 'JetBrains Mono', monospace;">� Küldő adatai:</h3>
                                         <p style="margin: 0 0 8px 0; color: #d1d5db;">
                                             <strong style="color: #f9fafb;">Név:</strong> ${clientName}
                                         </p>
@@ -160,18 +142,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create transporter - Mailcow SMTP configuration
+    // Create transporter - Mailpit for local development or production SMTP
     const isProduction = process.env.NODE_ENV === 'production';
     
     const transporter = nodemailer.createTransport({
-      host: isProduction ? process.env.SMTP_HOST : 'localhost', // mail.codexa.hu in production
-      port: isProduction ? parseInt(process.env.SMTP_PORT || '587') : 1025, // 587 (STARTTLS) or 465 (SSL)
-      secure: isProduction ? (process.env.SMTP_SECURE === 'true') : false, // true for 465, false for 587
+      host: isProduction ? process.env.SMTP_HOST : 'localhost',
+      port: isProduction ? parseInt(process.env.SMTP_PORT || '587') : 1025,
+      secure: isProduction ? (process.env.SMTP_SECURE === 'true') : false,
       auth: isProduction ? {
-        user: process.env.EMAIL_USER, // info@codexa.hu
-        pass: process.env.EMAIL_PASS, // email password
-      } : undefined, // No auth needed for Mailpit in dev
-      // Mailcow specific settings
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      } : undefined, // No auth needed for Mailpit
       tls: isProduction ? {
         rejectUnauthorized: process.env.SMTP_REJECT_UNAUTHORIZED !== 'false'
       } : {

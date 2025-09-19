@@ -5,10 +5,13 @@ import Portfolio from '@/components/Portfolio';
 import Services from '@/components/Services';
 import Quote from '@/components/Quote';
 import Footer from '@/components/Footer';
+import StructuredData from '@/components/StructuredData';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+    <>
+      <StructuredData />
+      <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
       <Navbar />
       <section id="hero">
         <Hero />
@@ -27,5 +30,6 @@ export default function Home() {
       </section>
       <Footer />
     </main>
+    </>
   );
 }

@@ -52,12 +52,12 @@ export default function ThemeSelector() {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-2 text-sm font-mono text-gray-300 hover:text-white bg-gray-800 hover:bg-gray-700 border border-gray-600 hover:border-gray-500 rounded-md transition-all duration-300"
+        className="flex items-center gap-2 px-4 py-3 text-base font-medium text-gray-300 hover:text-blue-400 bg-gray-800/80 hover:bg-blue-500/10 border border-blue-500/30 hover:border-blue-400 rounded-md transition-all duration-300 backdrop-blur-sm min-w-[120px]"
         aria-label="Theme selector"
       >
-        {currentTheme?.icon}
+        <span className="text-blue-400 w-5 h-5">{currentTheme?.icon}</span>
         <span className="hidden sm:inline">{currentTheme?.label}</span>
-        <svg className="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-4 h-4 ml-auto text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
       </button>
@@ -71,8 +71,8 @@ export default function ThemeSelector() {
           />
           
           {/* Dropdown */}
-          <div className="absolute right-0 mt-2 w-48 bg-gray-800 border border-gray-600 rounded-md shadow-lg z-50">
-            <div className="py-1">
+          <div className="absolute right-0 mt-2 w-52 bg-gray-800/95 border border-blue-500/30 rounded-md shadow-xl backdrop-blur-sm z-50">
+            <div className="py-2">
               {themes.map((themeOption) => (
                 <button
                   key={themeOption.value}
@@ -81,17 +81,17 @@ export default function ThemeSelector() {
                     setIsOpen(false);
                   }}
                   className={`
-                    w-full flex items-center gap-3 px-4 py-2 text-sm font-mono text-left transition-colors duration-200
+                    w-full flex items-center gap-3 px-4 py-3 text-base font-medium text-left transition-colors duration-200
                     ${theme === themeOption.value 
-                      ? 'bg-blue-600 text-white' 
-                      : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                      ? 'bg-blue-500/20 text-blue-300 border-l-2 border-blue-400' 
+                      : 'text-gray-300 hover:bg-blue-500/10 hover:text-blue-400'
                     }
                   `}
                 >
-                  {themeOption.icon}
+                  <span className="text-blue-400 w-5 h-5">{themeOption.icon}</span>
                   {themeOption.label}
                   {theme === themeOption.value && (
-                    <svg className="w-4 h-4 ml-auto" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-5 h-5 ml-auto text-blue-400" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   )}

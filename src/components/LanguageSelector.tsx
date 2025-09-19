@@ -96,13 +96,13 @@ export default function LanguageSelector() {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-2 rounded-md bg-gray-800 hover:bg-gray-700 text-white font-mono text-sm transition-all duration-300 border border-gray-600 hover:border-gray-500"
+        className="flex items-center gap-2 px-4 py-3 rounded-md bg-gray-800/80 hover:bg-blue-500/10 text-gray-300 hover:text-blue-400 font-medium text-base transition-all duration-300 border border-blue-500/30 hover:border-blue-400 backdrop-blur-sm min-w-[130px]"
       >
         <span className="flex-shrink-0">{currentLanguage?.flag}</span>
         <span className="hidden sm:block">{currentLanguage?.label}</span>
-        <span className="sm:hidden">{currentLanguage?.code.toUpperCase()}</span>
+        <span className="sm:hidden text-blue-400 font-bold">{currentLanguage?.code.toUpperCase()}</span>
         <svg
-          className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+          className={`w-4 h-4 transition-transform duration-200 text-blue-400 ml-auto ${isOpen ? 'rotate-180' : ''}`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -112,16 +112,16 @@ export default function LanguageSelector() {
       </button>
 
       {isOpen && (
-        <div className="absolute top-full left-0 mt-1 w-full min-w-[120px] bg-gray-800 border border-gray-600 rounded-md shadow-lg z-50">
+        <div className="absolute top-full left-0 mt-1 w-full min-w-[130px] bg-gray-800/95 border border-blue-500/30 rounded-md shadow-xl backdrop-blur-sm z-50">
           {languages.map((lang) => (
             <button
               key={lang.code}
               onClick={() => handleLanguageChange(lang.code)}
               className={`
-                w-full flex items-center gap-2 px-3 py-2 text-left font-mono text-sm transition-all duration-200
+                w-full flex items-center gap-3 px-4 py-3 text-left font-medium text-base transition-all duration-200
                 ${language === lang.code 
-                  ? 'bg-blue-600 text-white' 
-                  : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                  ? 'bg-blue-500/20 text-blue-300 border-l-2 border-blue-400' 
+                  : 'text-gray-300 hover:bg-blue-500/10 hover:text-blue-400'
                 }
                 ${lang.code === languages[0].code ? 'rounded-t-md' : ''}
                 ${lang.code === languages[languages.length - 1].code ? 'rounded-b-md' : ''}

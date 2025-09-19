@@ -1,39 +1,8 @@
 'use client';
 
 import { ToastContainer } from 'react-toastify';
-import { useTheme } from '@/contexts/ThemeContext';
-import { useEffect, useState } from 'react';
 
 export default function ToastWrapper() {
-  const { theme } = useTheme();
-  const [toastTheme, setToastTheme] = useState<'light' | 'dark' | 'colored'>('dark');
-  
-  useEffect(() => {
-    const getToastTheme = () => {
-      if (theme === 'system') {
-        // Rendszer téma esetén ellenőrizzük a media query-t
-        if (typeof window !== 'undefined') {
-          return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        }
-        return 'dark';
-      }
-      return theme === 'dark' ? 'dark' : 'light';
-    };
-    
-    setToastTheme(getToastTheme());
-    
-    // Figyeljük a rendszer téma változását
-    if (theme === 'system' && typeof window !== 'undefined') {
-      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-      const handleChange = () => {
-        setToastTheme(mediaQuery.matches ? 'dark' : 'light');
-      };
-      
-      mediaQuery.addEventListener('change', handleChange);
-      return () => mediaQuery.removeEventListener('change', handleChange);
-    }
-  }, [theme]);
-
   return (
     <ToastContainer 
       position="top-right"
@@ -45,9 +14,10 @@ export default function ToastWrapper() {
       pauseOnFocusLoss
       draggable
       pauseOnHover
-      theme={toastTheme}
-      toastClassName="!rounded-lg !shadow-lg"
+      theme="dark"
+      toastClassName="!bg-gray-800/80 !backdrop-blur-sm !border !border-blue-500/30 !text-white !rounded-xl !shadow-2xl !shadow-blue-500/20"
       className="!top-20 !right-4"
+      progressClassName="!bg-gradient-to-r !from-blue-400 !to-blue-600"
     />
   );
 }

@@ -9,75 +9,120 @@ export default function Services() {
 
   const services = [
     {
-      endpoint: 'GET /websites/custom',
-      title: t('services.custom_development'),
-      description: t('services.custom_development_desc'),
-      features: [t('services.features.responsive'), t('services.features.fast'), t('services.features.seo')]
+      icon: (
+        <svg className="w-16 h-16 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9m0 9c-5 0-9-4-9-9s4-9 9-9" />
+        </svg>
+      ),
+      title: t('services.basic_website.title'),
+      description: t('services.basic_website.description'),
+      price: t('services.basic_website.price'),
+      features: t('services.basic_website.features')
     },
     {
-      endpoint: 'GET /frameworks/modern',
-      title: t('services.modern_frameworks'),
-      description: t('services.modern_frameworks_desc'),
-      features: [t('services.features.modern'), t('services.features.secure'), t('services.features.support')]
+      icon: (
+        <svg className="w-16 h-16 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+        </svg>
+      ),
+      title: t('services.webshop.title'),
+      description: t('services.webshop.description'),
+      price: t('services.webshop.price'),
+      features: t('services.webshop.features')
     },
     {
-      endpoint: 'GET /maintenance/support',
-      title: t('services.maintenance'),
-      description: t('services.maintenance_desc'),
-      features: [t('services.features.support'), t('services.features.fast'), t('services.features.secure')]
+      icon: (
+        <svg className="w-16 h-16 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+      ),
+      title: t('services.maintenance.title'),
+      description: t('services.maintenance.description'),
+      price: t('services.maintenance.price'),
+      features: t('services.maintenance.features')
     }
   ];
 
   return (
-    <section className="py-20 bg-gray-900" ref={ref}>
+    <section className="py-20 bg-gradient-to-b from-gray-900 to-gray-800" ref={ref}>
       <div className="container mx-auto px-6 lg:px-8">
-        <h2 className={`font-mono text-3xl md:text-4xl font-bold text-white mb-12 text-center transition-all duration-700 ${isVisible ? 'scroll-visible' : 'scroll-hidden'}`}>
-          {t('services.title')}
-        </h2>
+        <div className="text-center mb-16">
+          <h2 className={`text-4xl md:text-5xl font-bold text-white mb-4 transition-all duration-700 ${isVisible ? 'scroll-visible' : 'scroll-hidden'}`}>
+            <span className="text-blue-400">{t('services.title')}</span>
+          </h2>
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+            {t('services.subtitle')}
+          </p>
+        </div>
         
-        <div className="max-w-4xl mx-auto">
-          <div className={`bg-gray-800 rounded-lg border border-gray-700 p-8 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-700 ${isVisible ? 'scroll-slide-left scroll-visible' : 'scroll-slide-left'}`}>
-            <div className="font-mono">
-              {services.map((service, index) => (
-                <div key={index} className="mb-8 last:mb-0">
-                  {/* API endpoint style header */}
-                  <div className="flex items-center gap-4 mb-4">
-                    <span className="bg-green-600 text-white px-3 py-1 rounded text-sm font-bold">
-                      GET
-                    </span>
-                    <code className="text-blue-400 text-lg">
-                      {service.endpoint}
-                    </code>
-                  </div>
-                  
-                  {/* Service details */}
-                  <div className="ml-16 pl-4 border-l-2 border-gray-700">
-                    <h3 className="text-white text-xl font-semibold mb-2">
-                      {service.title}
-                    </h3>
-                    <p className="text-gray-300 mb-4">
-                      {service.description}
-                    </p>
-                    
-                    {/* Features list */}
-                    <ul className="text-gray-400 text-sm space-y-1">
-                      {service.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-center gap-2">
-                          <span className="text-green-400">✓</span>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  
-                  {/* Separator */}
-                  {index < services.length - 1 && (
-                    <div className="border-b border-gray-700 mt-6"></div>
-                  )}
+        <div className={`grid md:grid-cols-3 gap-8 max-w-6xl mx-auto transition-all duration-700 ${isVisible ? 'scroll-visible' : 'scroll-hidden'}`}>
+          {services.map((service, index) => (
+            <div key={index} className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 border border-blue-500/20 hover:border-blue-500/40 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 group">
+              {/* Icon */}
+              <div className="mb-6 group-hover:scale-110 transition-transform duration-300 flex justify-center">
+                {service.icon}
+              </div>
+              
+              {/* Title & Price */}
+              <div className="mb-4">
+                <h3 className="text-2xl font-bold text-white mb-2">
+                  {service.title}
+                </h3>
+                <div className="text-3xl font-bold text-blue-400 mb-4">
+                  {service.price}
                 </div>
-              ))}
+              </div>
+              
+              {/* Description */}
+              <p className="text-gray-300 mb-6 leading-relaxed">
+                {service.description}
+              </p>
+              
+              {/* Features */}
+              <ul className="space-y-3 mb-8">
+                {Array.isArray(service.features) ? service.features.map((feature: string, featureIndex: number) => (
+                  <li key={featureIndex} className="flex items-center gap-3">
+                    <span className="text-blue-400 text-lg">✓</span>
+                    <span className="text-gray-300">{feature}</span>
+                  </li>
+                )) : null}
+              </ul>
+              
+              {/* CTA Button */}
+              <button 
+                onClick={() => {
+                  const element = document.getElementById('contact');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+                className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 hover:scale-105 transform"
+              >
+                {t('services.cta')}
+              </button>
             </div>
-          </div>
+          ))}
+        </div>
+        
+        {/* Additional info */}
+        <div className="text-center mt-16">
+          <p className="text-gray-400 mb-4 flex items-center justify-center gap-2">
+            <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+            </svg>
+            <strong className="text-blue-400">{t('services.custom_needs.question')}</strong> {t('services.custom_needs.answer')}
+          </p>
+          <button 
+            onClick={() => {
+              const element = document.getElementById('contact');
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+            className="text-blue-300 hover:text-blue-200 font-medium underline decoration-2 underline-offset-4 hover:no-underline transition-all duration-300"
+          >
+            {t('services.custom_needs.cta')}
+          </button>
         </div>
       </div>
     </section>

@@ -72,20 +72,25 @@ export default function Technologies() {
   const { t } = useLanguage();
 
   return (
-    <section className="py-16 sm:py-20 bg-gray-900" ref={ref}>
+    <section className="py-16 sm:py-20 bg-gradient-to-b from-gray-900 to-black" ref={ref}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`max-w-4xl mx-auto transition-all duration-700 ${isVisible ? 'scroll-visible' : 'scroll-hidden'}`}>
-          <h2 className="font-mono text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-8 sm:mb-12 text-center px-2">
-            {t('technologies.title')}
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+            <span className="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
+              {t('technologies.title')}
+            </span>
           </h2>
+          <p className="text-gray-300 text-lg text-center mb-12 max-w-2xl mx-auto">
+            {t('technologies.subtitle')}
+          </p>
           
-          <div className={`bg-gray-800 rounded-lg p-4 sm:p-6 lg:p-8 border border-gray-700 shadow-2xl hover:shadow-blue-500/10 transition-all duration-700 overflow-hidden ${isVisible ? 'scroll-slide-left scroll-visible' : 'scroll-slide-left'}`}>
+          <div className={`bg-gradient-to-br from-gray-800/80 to-gray-900/80 rounded-2xl p-4 sm:p-6 lg:p-8 border border-blue-500/30 shadow-2xl hover:shadow-blue-500/20 transition-all duration-700 backdrop-blur-sm overflow-hidden ${isVisible ? 'scroll-slide-left scroll-visible' : 'scroll-slide-left'}`}>
             <div className="font-mono text-gray-300">
               <div className="flex items-center gap-1 sm:gap-2 mb-3 sm:mb-4">
                 <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
                 <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
                 <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
-                <span className="text-gray-400 ml-2 sm:ml-4 text-xs sm:text-sm truncate">tech-stack.json</span>
+                <span className="text-blue-400 ml-2 sm:ml-4 text-xs sm:text-sm truncate font-bold">tech-stack.json</span>
               </div>
               
               <div 
@@ -99,14 +104,14 @@ export default function Technologies() {
               >
                 <div className="min-w-0">
 {`{
-  `}<span className="text-blue-400">&quot;frameworks&quot;</span>{`: [`}
+  `}<span className="text-blue-400 font-bold">&quot;frameworks&quot;</span>{`: [`}
     <span className="text-green-400">&quot;React&quot;</span>, <span className="text-green-400">&quot;Next.js&quot;</span>, <span className="text-green-400">&quot;Vue.js&quot;</span>,
     <span className="text-green-400">&quot;Angular&quot;</span>, <span className="text-green-400">&quot;Nuxt.js&quot;</span>
   {`],
-  `}<span className="text-blue-400">&quot;backend&quot;</span>{`: [`}
+  `}<span className="text-blue-400 font-bold">&quot;backend&quot;</span>{`: [`}
     <span className="text-green-400">&quot;Laravel&quot;</span>, <span className="text-green-400">&quot;Node.js&quot;</span>, <span className="text-green-400">&quot;Express&quot;</span>, <span className="text-green-400">&quot;.NET&quot;</span>
   {`],
-  `}<span className="text-blue-400">&quot;tools&quot;</span>{`: [`}
+  `}<span className="text-blue-400 font-bold">&quot;tools&quot;</span>{`: [`}
     <span className="text-green-400">&quot;Docker&quot;</span>, <span className="text-green-400">&quot;Git&quot;</span>, <span className="text-green-400">&quot;TailwindCSS&quot;</span>
   {`]
 }`}
@@ -133,7 +138,7 @@ export default function Technologies() {
             ].map((tech) => (
               <span
                 key={tech.name}
-                className="bg-gray-700 text-gray-300 px-2 sm:px-3 lg:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-mono border border-gray-600 hover:border-blue-500 hover:scale-105 hover:bg-gray-600 transition-all duration-300 cursor-pointer flex items-center gap-1 sm:gap-2 whitespace-nowrap"
+                className="bg-gray-700/80 text-gray-300 px-2 sm:px-3 lg:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium border border-blue-500/30 hover:border-blue-400 hover:scale-105 hover:bg-blue-500/10 transition-all duration-300 cursor-pointer flex items-center gap-1 sm:gap-2 whitespace-nowrap backdrop-blur-sm"
               >
                 <span className={tech.color}>{tech.icon}</span>
                 <span className="truncate">{tech.name}</span>

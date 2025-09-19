@@ -3,6 +3,9 @@
 :root {
   --background: #0d1117;
   --foreground: #f9fafb;
+  --accent-gold: #f59e0b;
+  --accent-gold-dark: #d97706;
+  --accent-gold-light: #fbbf24;
 }
 
 /* Light theme variables */
@@ -502,4 +505,33 @@ html, body {
 .scroll-slide-right.scroll-visible {
   opacity: 1;
   transform: translateX(0);
+}
+
+/* Toast customization */
+:root {
+  --toastify-icon-color-success: #3b82f6 !important;
+  --toastify-icon-color-error: #ef4444 !important;
+  --toastify-icon-color-warning: #f59e0b !important;
+  --toastify-icon-color-info: #06b6d4 !important;
+}
+
+/* More specific toast icon styling */
+.Toastify__toast-container .Toastify__toast--success .Toastify__toast-icon svg {
+  fill: #3b82f6 !important;
+  color: #3b82f6 !important;
+}
+
+.Toastify__toast-container .Toastify__toast--error .Toastify__toast-icon svg {
+  fill: #ef4444 !important;
+  color: #ef4444 !important;
+}
+
+.Toastify__toast-container .Toastify__toast--warning .Toastify__toast-icon svg {
+  fill: #f59e0b !important;
+  color: #f59e0b !important;
+}
+
+.Toastify__toast-container .Toastify__toast--info .Toastify__toast-icon svg {
+  fill: #06b6d4 !important;
+  color: #06b6d4 !important;
 }
