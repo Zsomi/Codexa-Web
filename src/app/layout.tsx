@@ -17,22 +17,27 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Codexa - Weboldal készítés és karbantartás | Modern weboldalak vállalkozásoknak",
-  description: "Professzionális weboldal készítés és teljes körű karbantartás. Modern, reszponzív weboldalak és webshopok készítése. SEO optimalizálás, gyors betöltés, biztonságos működés. Magyarország.",
+  title: "Codexa - Weboldal készítés és karbantartás Budapest | Modern weboldalak vállalkozásoknak",
+  description: "Professzionális weboldal készítés és teljes körű karbantartás Magyarországon. Modern, reszponzív weboldalak és webshopok vállalkozásoknak. Laravel, Next.js, Angular fejlesztés. SEO optimalizálás, gyors betöltés, biztonságos működés. Kérjen ajánlatot még ma!",
   keywords: [
-    "weboldal készítés",
+    "weboldal készítés Budapest",
+    "weboldal készítés Magyarország",
     "weboldal karbantartás", 
     "webshop készítés",
-    "webfejlesztés",
+    "webfejlesztés Budapest",
     "SEO optimalizálás",
     "reszponzív weboldal",
-    "modern weboldal",
+    "modern weboldal készítés",
     "vállalkozás weboldal",
     "Next.js weboldal",
     "Laravel webfejlesztés",
+    "Angular fejlesztés",
     "weboldal frissítés",
     "weboldal támogatás",
-    "Magyarország webfejlesztés"
+    "professzionális webfejlesztés",
+    "webdesign Magyarország",
+    "online jelenlét",
+    "weboldal készítés ár"
   ],
   authors: [{ name: "Codexa" }],
   creator: "Codexa",
@@ -52,26 +57,27 @@ export const metadata: Metadata = {
     type: "website",
     locale: "hu_HU",
     url: "https://codexa.hu",
-    title: "Codexa - Weboldal készítés és karbantartás",
-    description: "Professzionális weboldal készítés és teljes körű karbantartás. Modern, reszponzív weboldalak és webshopok készítése vállalkozásoknak.",
-    siteName: "Codexa",
+    title: "Codexa - Weboldal készítés és karbantartás Budapest | Modern weboldalak",
+    description: "Professzionális weboldal készítés és teljes körű karbantartás Magyarországon. Modern, reszponzív weboldalak és webshopok vállalkozásoknak. Laravel, Next.js, Angular fejlesztés. Kérjen ajánlatot!",
+    siteName: "Codexa Webfejlesztés",
     images: [
       {
-        url: "/images/codexaweb.png",
+        url: "https://codexa.hu/images/codexaweb.png",
         width: 1200,
         height: 630,
-        alt: "Codexa - Modern weboldal készítés és karbantartás",
+        alt: "Codexa - Modern weboldal készítés és karbantartás Magyarországon",
+        type: "image/png"
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Codexa - Weboldal készítés és karbantartás",
-    description: "Professzionális weboldal készítés és teljes körű karbantartás. Modern, reszponzív weboldalak és webshopok készítése vállalkozásoknak.",
-    images: ["/images/codexaweb.png"],
+    title: "Codexa - Weboldal készítés és karbantartás Budapest",
+    description: "Professzionális weboldal készítés és teljes körű karbantartás Magyarországon. Modern, reszponzív weboldalak és webshopok vállalkozásoknak.",
+    images: ["https://codexa.hu/images/codexaweb.png"],
   },
   verification: {
-    google: "your-google-verification-code-here", // Replace with actual verification code
+    google: "eadc2d2de068f2c3",
   },
   alternates: {
     canonical: "https://codexa.hu",
